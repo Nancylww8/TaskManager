@@ -1,0 +1,127 @@
+/* CSS for Task Manager Application */
+
+/* Content Container */
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Add gap for spacing between containers */
+}
+
+/* Left Container */
+.left-container {
+  flex: 0.15; /* 设置为容器宽度的 15% */
+  margin-right: 10px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex; 
+  margin-top: 10px; 
+  justify-content: center; /* 水平居中 */
+}
+
+/* User Name and Avatar */
+.user-profile {
+  text-align: center; /* 文字居中 */
+}
+
+.username {
+  margin-bottom: 10px; /* 用户名底部间距 */
+  font-weight: bold;
+}
+
+
+
+/* Right Container */
+.right-container {
+  flex: 1; /* Set flex to occupy remaining space */
+  margin-left: 10px; /* Adjust margin for spacing */
+  border-radius: 10px; /* Adjust border radius */
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #2b8d8d;
+  color: #fff;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.logout-btn {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.username {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 20px;
+}
+
+/* Task List */
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks-table th, .tasks-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.tasks-table th {
+  background-color: #f2f2f2;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #2b8d8d;
+  color: #fff;
+}
+
+.tasks-container {
+  margin-bottom: 20px; /* Add bottom margin to create space between table and buttons */
+}
+
+/* Adjustments for button elements */
+#add-task-btn,
+#filter-btn,
+#delete-task-btn {
+  margin-top: 10px; /* Add top margin to space out the buttons */
+}
+
+.user-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
