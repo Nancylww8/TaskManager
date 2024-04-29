@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment2 - registration</title>
+    <style>
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; 
+        }
+
+        h1 {
+            width: 90%;
+            background-color: #2b8d8d;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .formcontainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            background-color: white; 
+            width: 500px;
+            height: auto;
+            border-radius: 8px; 
+        }
+
+        .center-container {
+            width: 100%; 
+        }
+
+        .textfield, .checkbox {
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start;
+            width: 100%; 
+        }
+
+        .textfield input {
+            align-self: center; 
+            width: calc(100% - 20px); 
+            padding: 10px; 
+            margin-top: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            align-self: center;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            margin-top: 10px;
+            width: calc(100% - 20px);
+        }
+        
+        button[type="submit"] {
+            background-color: #2b8d8d; 
+            border-radius: 5px;
+        }
+
+        button[type="reset"] {
+            background-color: #D0562C;
+            border-radius: 5px;
+        }
+
+        /* Style adjustments specifically for checkboxes */
+        .checkbox {
+            display: flex;
+            flex-direction: row; 
+            align-items: center; 
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .checkbox label {
+            margin-left: 5px; 
+        }
+
+        #newsletter, #terms {
+            margin-top: 0; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Task Manager</h1>
+        
+        <form method="post" action="./server/registration.php" id="registrationForm" onsubmit="return validate();">
+            <!-- write the validate function for this form. -->
+            <div class="center-container">
+                <div class="textfield">
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" id="email" placeholder="Email">
+                    <div class="error"></div>
+                </div>
+
+                <div class="textfield">
+                    <label for="login">User Name</label>
+                    <input type="text" name="login" id="login" placeholder="User name">
+                    <div class="error"></div>
+                </div>
+
+                <div class="textfield">
+                    <label for="pass">Password</label>
+                    <input type="password" name="password" id="pass" placeholder="Password">
+                    <div class="error"></div>
+                </div>
+                
+                <div class="textfield">
+                    <label for="pass2">Re-type Password</label>
+                    <input type="password" id="pass2" placeholder="Password">
+                    <div class="error"></div>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" name="newsletter" id="newsletter">
+                    <label for="newsletter">I agree to receive Task Manager newsletters</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" name="terms" id="terms">
+                    <label for="terms">I agree to the terms and conditions</label>
+                    <span id="termerror" class="error"></span>
+                </div>
+                 
+                <button type="submit" id="signup">Sign-Up</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form submission event listener
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting
+            
+            // Validate each field
+            var emailValid = validateEmail();
+            var nameValid = validateName();
+            var passwordValid = validatePassword();
+            var confirmpassValid = validateConfirmPass();
+            var termValid = validateTerm();
+            
+            // Check if both fields are valid before submitting
+            if (emailValid && nameValid && passwordValid && confirmpassValid && termValid) {
+                console.log("Form Submitted"); // Replace with actual form submission
+            }
+        });
+
+        // Newsletter checkbox event listener
+        document.getElementById("newsletter").addEventListener("change", function() {
+            if (this.checked) {
+                alert("Be cautious about subscribing to newsletters to avoid possible spam!");
+            }
+        });
+
+        // Event listeners for input fields
+        document.getElementById("email").addEventListener("input", function() {
+            validateEmail();
+        });
+
+        document.getElementById("login").addEventListener("input", function() {
+            validateName();
+        });
+
+        document.getElementById("pass").addEventListener("input", function() {
+            validatePassword();
+        });
+
+        document.getElementById("pass2").addEventListener("input", function() {
+            validateConfirmPass();
+        });
+
+        document.getElementById("terms").addEventListener("change", function() {
+            validateTerm();
+        });
+
+        // Sign-up button click event listener
+        document.getElementById('signup').addEventListener('click', function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Call validation functions and store their return values
+            var isEmailValid = validateEmail();
+            var isNameValid = validateName();
+            var isPasswordValid = validatePassword();
+            var isConfirmPassValid = validateConfirmPass();
+            var isTermValid = validateTerm();
+            
+            // Check if all validations passed
+            if (isEmailValid && isNameValid && isPasswordValid && isConfirmPassValid && isTermValid) {
+                // If all validations pass, submit the form
+                document.getElementById("registrationForm").submit();
+            } else {
+                // If any validation fails, log an error
+                console.log("Validation failed. Please correct the input.");
+            }
+        });
+
+        // Email validation function
+        function validateEmail() {
+            var emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var email = document.getElementById("email");
+            var emailInput = email.value.trim();
+            var errorMessage = email.nextElementSibling; 
+            if (!emailInput.match(emailRegexp)) {
+                email.style.borderColor = "red";
+                errorMessage.textContent = "✖ Email address should be non-empty with the format xyz@xyz.xyz";
+                return false;
+            } else {
+                email.style.borderColor = "initial";
+                errorMessage.textContent = "";
+                return true;
+            }
+        }
+
+        // Username validation function
+        function validateName() {
+            var name = document.getElementById("login");
+            var login = name.value.trim();
+            var errorMessage = name.nextElementSibling; 
+            if (login.length < 3 || login.length > 30) {
+                name.style.borderColor = "red";
+                errorMessage.textContent = "✖ User name should be at least 3 characters, and within 30 characters long.";
+                return false;
+            } else {
+                name.style.borderColor = "initial";
+                errorMessage.textContent = "";
+                return true;
+            }
+        }
+
+        // Password validation function
+        function validatePassword() {
+            var passwordInput = document.getElementById("pass");
+            var password1 = passwordInput.value.trim();
+            var errorMessage = passwordInput.nextElementSibling;
+            var regexp = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!password1.match(regexp)) {
+                passwordInput.style.borderColor = "red";
+                errorMessage.textContent = "✖ Password should be at least 6 characters, 1 uppercase, 1 lowercase.";
+                return false;
+            } else {
+                passwordInput.style.borderColor = "initial";
+                errorMessage.textContent = "";
+                return true;
+            }
+        }
+
+        // Confirm password validation function
+        function validateConfirmPass() {
+            var passwordInput1 = document.getElementById("pass");
+            var password11 = passwordInput1.value.trim();
+            
+            var confirmPassInput = document.getElementById("pass2");
+            var confirmPassword = confirmPassInput.value.trim();
+            var errorMessage = confirmPassInput.nextElementSibling;
+            
+            if (confirmPassword === "") {
+                confirmPassInput.style.borderColor = "red";
+                errorMessage.textContent = "✖ Please retype password.";
+                return false;
+            } else {
+                if (confirmPassword !== password11) {
+                    confirmPassInput.style.borderColor = "red";
+                    errorMessage.textContent = "✖ Please retype password.";
+                    return false;
+                } else {
+                    confirmPassInput.style.borderColor = "initial";
+                    errorMessage.textContent = "";
+                    return true;
+                }
+            }
+        }
+
+        // Terms checkbox validation function
+        function validateTerm() {
+            var termsCheckbox = document.getElementById("terms");
+            var errorMessage = termsCheckbox.nextElementSibling.nextElementSibling; 
+            if (!termsCheckbox.checked) {
+                // Checkbox is not checked, show error message
+                errorMessage.textContent = "✖ Please accept the terms and conditions.";
+                return false;
+            } else {
+                // Checkbox is checked, clear any error message
+                errorMessage.textContent = "";
+                // Form can be submitted here if needed
+                console.log("Form can be submitted");
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
