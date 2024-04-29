@@ -1,0 +1,156 @@
+/* CSS for Task Manager Application */
+
+/* Content Container */
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Left Container */
+.left-container {
+  flex: 0.15; 
+  margin-right: 10px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex; 
+  margin-top: 10px; 
+  justify-content: center;
+}
+
+/* User Name and Avatar */
+.user-profile {
+  text-align: center; 
+}
+
+.username {
+  margin-bottom: 10px; 
+  font-weight: bold;
+}
+
+/* Right Container */
+.right-container {
+  flex: 1; 
+  margin-left: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #2b8d8d;
+  color: #fff;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.logout-btn {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.username {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* Task List */
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks-table th, .tasks-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.tasks-table th {
+  background-color: #f2f2f2;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #2b8d8d;
+  color: #fff;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+}
+
+.tasks-container {
+  margin-bottom: 20px; 
+}
+
+/* Adjust Avatar Size */
+.user-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Buttons and Select Dropdowns */
+#add-task-btn,
+#sort-button,
+#search-btn {
+  margin-top: 10px; 
+}
+
+#sort-select,
+#sort-button,
+#search-input,
+#add-task-btn,
+#search-btn,
+#priorityFilter{
+  font-size: 16px;
+}
+
+/* Placeholder Color */
+#sort-select placeholder{
+  color: rgb(206, 202, 202);
+}
+
+/* Adjust Logout Button Size */
+.logout-btn{
+  font-size: 20px;
+}
+
+/* Sort Option Default Color */
+#sortSelect option[value="sortDefault"] {
+  color: rgb(197, 194, 194);
+}
+
